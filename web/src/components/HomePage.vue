@@ -28,7 +28,7 @@ export default {
   methods: {
     pick(league) {
       this.selectedLeague = league;
-      this.$router.push({ name: 'League', params: { name: league.name } });
+      this.$router.push({ name: 'League', params: { slug: league.slug } });
     },
   },
 };

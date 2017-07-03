@@ -13,11 +13,11 @@ export default new Router({
       component: HomePage
     },
     {
-      path: "/:name",
+      path: "/:slug",
       name: "League",
       component: LeaguePage,
       props: route => ({
-        name: route.params.name,
+        slug: route.params.slug,
         home: route.query.home,
         away: route.query.away
       })

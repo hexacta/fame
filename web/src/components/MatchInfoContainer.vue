@@ -10,13 +10,16 @@
 import MatchLoader from "@/components/MatchLoader";
 import MatchInfo from "@/components/MatchInfo";
 
-function getUrl(match) {
-  return `?home=${match.home}&away=${match.away}`;
+function getUrl(leagueId, match) {
+  console.log(match);
+  const homeQuery = match && match.home && `home=${match.home}`;
+  const awayQuery = match && match.away && `away=${match.away}`;
+  return `api/${leagueId}/match?${homeQuery}&${awayQuery}`;
 }
 
 export default {
   name: 'match-info-container',
-  props: ['match'],
+  props: ['match', 'leagueId'],
   components: {
     MatchLoader,
     MatchInfo
@@ -24,7 +27,7 @@ export default {
   data() {
     return {
       loading: true,
-      url: getUrl(this.match),
+      url: getUrl(this.leagueId, this.match),
       info: null
     };
   },
@@ -41,11 +44,11 @@ export default {
   methods: {
     reload() {
       this.loading = true;
-      fetch("api/e0/match")
+      fetch(this.url)
         .then(response => response.json())
-        .then(json => { 
-          this.info = json; 
-          this.loading = false; 
+        .then(json => {
+          this.info = json;
+          this.loading = false;
         });
     }
   }

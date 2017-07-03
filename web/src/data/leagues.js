@@ -1,5 +1,7 @@
 export default [
   {
+    id: "E0",
+    slug: "premier-league",
     name: "Premier League",
     teams: [
       "Bournemouth",
@@ -28,6 +30,8 @@ export default [
     ]
   },
   {
+    id: "I1",
+    slug: "serie-a",
     name: "Serie A",
     teams: [
       "Lazio",
