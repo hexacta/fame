@@ -11,7 +11,6 @@ import MatchLoader from "@/components/MatchLoader";
 import MatchInfo from "@/components/MatchInfo";
 
 function getUrl(leagueId, match) {
-  console.log(match);
   const homeQuery = match && match.home && `home=${match.home}`;
   const awayQuery = match && match.away && `away=${match.away}`;
   return `api/${leagueId}/match?${homeQuery}&${awayQuery}`;
@@ -34,11 +33,13 @@ export default {
   mounted() {
     this.reload();
   },
-  beforeUpdate() {
-    const newUrl = getUrl(this.match);
-    if (newUrl !== this.url) {
-      this.url = newUrl;
-      this.reload();
+  watch: {
+    match(newMatch) {
+      const newUrl = getUrl(this.leagueId, newMatch);
+      if (newUrl !== this.url) {
+        this.url = newUrl;
+        this.reload();
+      }
     }
   },
   methods: {
