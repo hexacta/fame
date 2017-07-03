@@ -41,14 +41,12 @@ export default {
   methods: {
     reload() {
       this.loading = true;
-      setTimeout(() => {
-        this.info = {
-          home: 0.6,
-          draw: 0.1,
-          away: 0.3
-        };
-        this.loading = false;
-      }, 1500);
+      fetch("api/e0/match")
+        .then(response => response.json())
+        .then(json => { 
+          this.info = json; 
+          this.loading = false; 
+        });
     }
   }
 };
