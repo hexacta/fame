@@ -8,20 +8,20 @@ function getMatchStats(leagueId, homeTeam, awayTeam) {
 
   const matchStats = {};
   Object.keys(homeStats).forEach(key => {
-		matchStats[key] = key.startsWith("A_") ? awayStats[key] : homeStats[key];
-	});
-	delete matchStats["HomeTeam"];
-	delete matchStats["AwayTeam"];
-	delete matchStats["Referee"];
+    matchStats[key] = key.startsWith("A_") ? awayStats[key] : homeStats[key];
+  });
+  delete matchStats["HomeTeam"];
+  delete matchStats["AwayTeam"];
+  delete matchStats["Referee"];
 
-	return matchStats;
+  return matchStats;
 }
 
 app.get("/api/:league/match", (req, res) => {
   const leagueId = req.params.league;
   const { home, away } = req.query;
 
-	const matchStats = getMatchStats(leagueId, home, away);
+  const matchStats = getMatchStats(leagueId, home, away);
 
   res.send({ home: 0.5, draw: 0.2, away: 0.3 });
 });
