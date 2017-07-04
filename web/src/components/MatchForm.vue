@@ -4,13 +4,13 @@
       <label>
         <span>Home:</span>
         <select v-model="home">
-          <option v-for="team in league.teams" :key="team">{{team}}</option>
+          <option v-for="team in teams" :key="team">{{team}}</option>
         </select>
       </label>
       <label>
         <span>Away:</span>
         <select v-model="away">
-          <option v-for="team in league.teams" :key="team">{{team}}</option>
+          <option v-for="team in teams" :key="team">{{team}}</option>
         </select>
       </label>
       <button v-on:click="submit">Estimate</button>
@@ -26,6 +26,7 @@ export default {
     return {
       home: this.match && this.match.home,
       away: this.match && this.match.away,
+      teams: this.league.teams.slice().sort(),
     };
   },
   methods: {
