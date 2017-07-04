@@ -1,8 +1,9 @@
 FROM node:6-slim
 
-WORKDIR /code
+WORKDIR /app
 
-COPY package.json /code/package.json
-COPY yarn.lock /code/yarn.lock
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
 RUN yarn install
-RUN mv /code/node_modules /node_modules
+
+COPY ./src /app/src

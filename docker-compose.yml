@@ -6,7 +6,7 @@ services:
       context: ./web
     command: yarn dev
     volumes:
-      - ./web:/code
+      - ./web:/app
     ports:
       - "8080:8080"
   server:
@@ -14,7 +14,7 @@ services:
       context: ./server
     command: yarn dev
     volumes:
-      - ./server:/code
+      - ./server/src:/app/src
     ports:
       - "8000:3000"
       - "5858:5858"
