@@ -23,9 +23,10 @@ app.get("/api/:league/match", (req, res) => {
   const { home, away } = req.query;
 
   const matchStats = getMatchStats(leagueId, home, away);
+  const modelUrl = `${leagueId.toLowerCase()}model:${process.env.MODELPORT}`;
 
   axios
-    .post(`http://e0model:${process.env.MODELPORT}/predictproba`, matchStats)
+    .post(`http://${modelUrl}/predictproba`, matchStats)
     .then(response => {
       console.log(response.data);
       const { H, D, A } = response.data[0];
