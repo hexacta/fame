@@ -25,16 +25,16 @@ app.get("/api/:league/match", (req, res) => {
   const matchStats = getMatchStats(leagueId, home, away);
 
   axios
-    .post("http://localhost:4000/predictproba", matchStats)
+    .post(`http://e0model:${process.env.MODELPORT}/predictproba`, matchStats)
     .then(response => {
       console.log(response.data);
-			const {H,D,A} = response.data[0]
-      res.send({home: H, draw: D, away: A});
+      const { H, D, A } = response.data[0];
+      res.send({ home: H, draw: D, away: A });
     })
     .catch(error => {
       console.log(error.response.data);
-      res.status(500).send({error: error.response.data});
+      res.status(500).send({ error: error.response.data });
     });
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);

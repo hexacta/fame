@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  server:
+    build: 
+      context: ./server
+    command: yarn dev
+    volumes:
+      - ./server:/code/server
+    ports:
+      - "8000:3000"
+      - "5858:5858"
+    environment:
+      - PORT=3000
+      - MODELPORT=8080
+  e0model:
+    build:
+      context: ./ml
+      dockerfile: Dockerfile
+    environment:
+      - PORT=8080
