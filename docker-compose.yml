@@ -16,6 +16,12 @@ services:
   e0model:
     build:
       context: ./ml
-      dockerfile: Dockerfile
+      dockerfile: e0.dockerfile
+    environment:
+      - PORT=8080
+  i1model:
+    build:
+      context: ./ml
+      dockerfile: i1.dockerfile
     environment:
       - PORT=8080
