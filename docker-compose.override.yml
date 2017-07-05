@@ -12,6 +12,8 @@ services:
     command: yarn dev
     volumes:
       - ./web:/app
+    ports:
+      - "8080:8080"
   server:
     command: yarn dev
     volumes:

@@ -9,6 +9,8 @@ services:
     build:
       context: ./web
       dockerfile: prod.dockerfile
+    ports:
+      - "4002:4002"
   server:
     command: yarn start
     environment:
