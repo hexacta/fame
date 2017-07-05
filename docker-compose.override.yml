@@ -1,0 +1,24 @@
+version: "3"
+
+# dev environment
+# this file extends docker-compose.yml
+# docker-compose up
+
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: dev.dockerfile
+    command: yarn dev
+    volumes:
+      - ./web:/app
+  server:
+    command: yarn dev
+    volumes:
+      - ./server/src:/app/src
+    ports:
+      - "8000:80"
+      - "5858:5858"
+    environment:
+      - PORT=80
+

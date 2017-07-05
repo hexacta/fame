@@ -8,9 +8,10 @@
 		"postinstall": "run-s install:server install:web",
 		"install:web": "cd web && yarn install",
 		"install:server": "cd server && yarn install",
-    "dev": "run-p dev:server dev:web",
-    "dev:web": "npm run dev --prefix web",
-    "dev:server": "npm run dev --prefix server"
+    "dev": "docker-compose up --build",
+    "build:web": "cd web && yarn build",
+    "up:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build",
+    "start": "run-s build:web up:prod"
   },
   "devDependencies": {
     "npm-run-all": "^4.0.2"

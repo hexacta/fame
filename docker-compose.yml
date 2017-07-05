@@ -4,22 +4,13 @@ services:
   web:
     build: 
       context: ./web
-    command: yarn dev
-    volumes:
-      - ./web:/app
     ports:
       - "8080:8080"
   server:
     build: 
       context: ./server
-    command: yarn dev
-    volumes:
-      - ./server/src:/app/src
-    ports:
-      - "8000:3000"
-      - "5858:5858"
     environment:
-      - PORT=3000
+      - PORT=80
       - MODELPORT=8080
   e0model:
     build:
