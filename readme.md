@@ -10,6 +10,14 @@ $ docker-compose up
 ```
 After that, the app should be running on http://localhost:8080  
 
+If you are using docker toolbox the app would be running on http://[dockermachineip]:8080
+
+In order to know what your ip is run the following command at toolbox:
+```bash
+$ docker-machine ip
+```
+
+
 ## Developing
 
 ### Built With
