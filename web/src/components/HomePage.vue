@@ -13,6 +13,7 @@
 <script>
 import LeaguePicker from '@/components/LeaguePicker';
 import leagues from '@/data/leagues';
+import Velocity from "velocity-animate";
 
 export default {
   name: 'home',
@@ -22,14 +23,25 @@ export default {
   data() {
     return {
       selectedLeague: null,
-      leagues,
+      cloneImageForAnimation: null,
+      leagues
     };
   },
   methods: {
-    pick(league) {
+    pick(league, event) {
       this.selectedLeague = league;
+      this.selectedLeagueImage = event.target;
+      this.cloneImageForAnimation = event.target.cloneNode(true);
+      this.cloneImageForAnimation.style.top = `${event.target.y}px`;
+      this.cloneImageForAnimation.style.left = `${event.target.x}px`;
+      this.cloneImageForAnimation.style.position = 'absolute';
+      this.body = document.querySelector('body');
+      this.selectedLeagueImage.style.opacity = 0;
+      this.body.appendChild(this.cloneImageForAnimation);
+      
+      Velocity.animate(this.cloneImageForAnimation, {transition: '0.85s ease-in-out;', top: '10%', left: '42%'});
       this.$router.push({ name: 'League', params: { slug: league.slug } });
-    },
+    }
   },
 };
 </script>
@@ -49,4 +61,5 @@ export default {
 .picker {
   text-align: center;
 }
+
 </style>

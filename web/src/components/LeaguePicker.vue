@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="league in leagues" :key="league.name">
-        <a v-on:click="pick(league)">
+        <a v-on:click="pick(league, $event)">
           <league-item :league="league"></league-item>  
         </a>
       </li>
@@ -25,9 +25,9 @@ export default {
     };
   },
   methods: {
-    pick(league) {
+    pick(league, event) {
       this.league = league;
-      this.$emit('pick', league);
+      this.$emit('pick', league, event);
     },
   },
 };

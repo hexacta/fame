@@ -1,5 +1,7 @@
 <template>
   <div>
+    <img :src="leagueLogo" />
+    <br />
     <match-form :league="league" :match="match" v-on:submit="loadMatch">
     </match-form>
     <match-info-container v-if="match" :match="match" :league-id="league.id"></match-info-container>
@@ -11,6 +13,10 @@ import MatchForm from '@/components/MatchForm';
 import MatchInfoContainer from '@/components/MatchInfoContainer';
 import leagues from '@/data/leagues';
 
+function getLogo(league) {
+  return `/static/img/leaguesLogos/${league}.png`
+}
+
 export default {
   name: 'league-page',
   components: { MatchForm, MatchInfoContainer },
@@ -19,6 +25,7 @@ export default {
     return {
       league: leagues.find(league => league.slug === this.slug),
       match: (this.home || this.away) ? { home: this.home, away: this.away } : null,
+      leagueLogo: getLogo(this.slug)
     };
   },
   methods: {
@@ -31,5 +38,10 @@ export default {
 </script>
 
 <style scoped>
+div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
 </style>
