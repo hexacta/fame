@@ -39,8 +39,20 @@ export default {
       this.selectedLeagueImage.style.opacity = 0;
       this.body.appendChild(this.cloneImageForAnimation);
       
-      Velocity.animate(this.cloneImageForAnimation, {transition: '0.85s ease-in-out;', top: '10%', left: '42%'});
       this.$router.push({ name: 'League', params: { slug: league.slug } });
+
+      Velocity.animate(
+        this.cloneImageForAnimation, {
+          transition: '0.85s ease-in-out;', 
+          top: '10.12%', 
+          left: '50%', 
+          marginLeft: `-${this.cloneImageForAnimation.width/2}px` 
+        }
+      ).then(() => {
+        setTimeout(() => {
+          this.body.removeChild(this.cloneImageForAnimation);
+        },350);
+      });
     }
   },
 };

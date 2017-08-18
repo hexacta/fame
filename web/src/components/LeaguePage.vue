@@ -33,15 +33,14 @@ export default {
       this.$router.push({ name: 'League', params: { slug: this.slug }, query: match });
       this.match = match;
     },
-  },
+  }
 };
 </script>
 
 <style scoped>
-div {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+img {
+  margin: auto;
+  display: block;
 }
 
 </style>

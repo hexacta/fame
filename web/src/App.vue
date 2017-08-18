@@ -61,11 +61,11 @@ header span {
 }
 
 .fade-leave-active {
-  transition: opacity 0.75s ease;
+  transition: opacity 0.5s ease;
   opacity: 0;
 }
 
 .fade-enter-active {
-  transition: opacity 0.75s ease;
+  transition: opacity 0.25s ease;
 }
 </style>
