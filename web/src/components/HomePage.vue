@@ -36,7 +36,7 @@ export default {
       this.cloneImageForAnimation.style.left = `${event.target.x}px`;
       this.cloneImageForAnimation.style.position = 'absolute';
       this.body = document.querySelector('body');
-      this.selectedLeagueImage.style.opacity = 0;
+      this.selectedLeagueImage.style.visibility = 'hidden';
       this.body.appendChild(this.cloneImageForAnimation);
       
       this.$router.push({ name: 'League', params: { slug: league.slug } });
@@ -44,7 +44,7 @@ export default {
       Velocity.animate(
         this.cloneImageForAnimation, {
           transition: '0.85s ease-in-out;', 
-          top: '10.12%', 
+          top: document.querySelector('main').offsetTop, 
           left: '50%', 
           marginLeft: `-${this.cloneImageForAnimation.width/2}px` 
         }
