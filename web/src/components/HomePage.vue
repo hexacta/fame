@@ -15,6 +15,31 @@ import LeaguePicker from '@/components/LeaguePicker';
 import leagues from '@/data/leagues';
 import Velocity from "velocity-animate";
 
+function animateLeagueLogoPicked(leaguePicked) {
+  const selectedLeagueImage = leaguePicked;
+  const cloneImageForAnimation = leaguePicked.cloneNode(true);
+  const body = document.querySelector('body');
+
+  cloneImageForAnimation.style.top = `${leaguePicked.y}px`;
+  cloneImageForAnimation.style.left = `${leaguePicked.x}px`;
+  cloneImageForAnimation.style.position = 'absolute';
+  selectedLeagueImage.style.visibility = 'hidden';
+  body.appendChild(cloneImageForAnimation);
+  
+  Velocity.animate(
+    cloneImageForAnimation, {
+      transition: '0.85s ease-in-out;', 
+      top: document.querySelector('main').offsetTop, 
+      left: '50%', 
+      marginLeft: `-${cloneImageForAnimation.width/2}px` 
+    }
+  ).then(() => {
+    setTimeout(() => {
+      body.removeChild(cloneImageForAnimation);
+    },350);
+  });
+}
+
 export default {
   name: 'home',
   components: {
@@ -30,29 +55,9 @@ export default {
   methods: {
     pick(league, event) {
       this.selectedLeague = league;
-      this.selectedLeagueImage = event.target;
-      this.cloneImageForAnimation = event.target.cloneNode(true);
-      this.cloneImageForAnimation.style.top = `${event.target.y}px`;
-      this.cloneImageForAnimation.style.left = `${event.target.x}px`;
-      this.cloneImageForAnimation.style.position = 'absolute';
-      this.body = document.querySelector('body');
-      this.selectedLeagueImage.style.visibility = 'hidden';
-      this.body.appendChild(this.cloneImageForAnimation);
-      
-      this.$router.push({ name: 'League', params: { slug: league.slug } });
+      animateLeagueLogoPicked(event.target);
 
-      Velocity.animate(
-        this.cloneImageForAnimation, {
-          transition: '0.85s ease-in-out;', 
-          top: document.querySelector('main').offsetTop, 
-          left: '50%', 
-          marginLeft: `-${this.cloneImageForAnimation.width/2}px` 
-        }
-      ).then(() => {
-        setTimeout(() => {
-          this.body.removeChild(this.cloneImageForAnimation);
-        },350);
-      });
+      this.$router.push({ name: 'League', params: { slug: league.slug } });
     }
   },
 };

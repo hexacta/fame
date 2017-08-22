@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="leagueLogo" />
+    <league-logo class="center" :league="league"></league-logo>
     <br />
     <match-form :league="league" :match="match" v-on:submit="loadMatch">
     </match-form>
@@ -11,6 +11,7 @@
 <script>
 import MatchForm from '@/components/MatchForm';
 import MatchInfoContainer from '@/components/MatchInfoContainer';
+import LeagueLogo from '@/components/LeagueLogo';
 import leagues from '@/data/leagues';
 
 function getLogo(league) {
@@ -19,7 +20,7 @@ function getLogo(league) {
 
 export default {
   name: 'league-page',
-  components: { MatchForm, MatchInfoContainer },
+  components: { MatchForm, MatchInfoContainer, LeagueLogo },
   props: ['slug', 'home', 'away'],
   data() {
     return {
@@ -38,7 +39,8 @@ export default {
 </script>
 
 <style scoped>
-img {
+
+.center {
   margin: auto;
   display: block;
 }

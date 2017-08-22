@@ -1,28 +1,22 @@
 <template>
-  	<transition 
-	  	appear
-	  	v-on:appear="enter"
-	    v-bind:css="false"
-    >
-  		<img :src="leagueLogo" :alt="league.name" :title="league.name" />
-  	</transition>
+	<transition 
+  	appear
+  	v-on:appear="enter"
+    v-bind:css="false"
+  >
+		<league-logo class="pointer" :league="league"></league-logo>
+	</transition>
 </template>
 
 <script>
 import Velocity from "velocity-animate"
-
-function getLogo(league) {
-	return `/static/img/leaguesLogos/${league}.png`
-}
+import LeagueLogo from '@/components/LeagueLogo';
 
 export default {
   name: 'league-item',
   props: ['league'],
-
-  data() {
-  	return {
-  		leagueLogo: getLogo(this.league.slug)
-  	}
+  components: {
+    LeagueLogo
   },
 
   methods: {
@@ -34,7 +28,9 @@ export default {
 </script>
 
 <style scoped>
-	img {
-		cursor: pointer;
-	}
+
+.pointer {
+	cursor: pointer;
+}
+
 </style>
