@@ -13,32 +13,6 @@
 <script>
 import LeaguePicker from '@/components/LeaguePicker';
 import leagues from '@/data/leagues';
-import Velocity from "velocity-animate";
-
-function animateLeagueLogoPicked(leaguePicked) {
-  const selectedLeagueImage = leaguePicked;
-  const cloneImageForAnimation = leaguePicked.cloneNode(true);
-  const body = document.querySelector('body');
-
-  cloneImageForAnimation.style.top = `${leaguePicked.y}px`;
-  cloneImageForAnimation.style.left = `${leaguePicked.x}px`;
-  cloneImageForAnimation.style.position = 'absolute';
-  selectedLeagueImage.style.visibility = 'hidden';
-  body.appendChild(cloneImageForAnimation);
-  
-  Velocity.animate(
-    cloneImageForAnimation, {
-      transition: '0.85s ease-in-out;', 
-      top: document.querySelector('main').offsetTop, 
-      left: '50%', 
-      marginLeft: `-${cloneImageForAnimation.width/2}px` 
-    }
-  ).then(() => {
-    setTimeout(() => {
-      body.removeChild(cloneImageForAnimation);
-    },350);
-  });
-}
 
 export default {
   name: 'home',
@@ -48,15 +22,12 @@ export default {
   data() {
     return {
       selectedLeague: null,
-      cloneImageForAnimation: null,
       leagues
     };
   },
   methods: {
     pick(league, event) {
       this.selectedLeague = league;
-      animateLeagueLogoPicked(event.target);
-
       this.$router.push({ name: 'League', params: { slug: league.slug } });
     }
   },
