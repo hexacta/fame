@@ -26,7 +26,7 @@ export default {
     };
   },
   methods: {
-    pick(league, event) {
+    pick(league) {
       this.selectedLeague = league;
       this.$router.push({ name: 'League', params: { slug: league.slug } });
     }

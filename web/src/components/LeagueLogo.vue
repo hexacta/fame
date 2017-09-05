@@ -1,5 +1,5 @@
 <template>
-  <img :src="leagueLogo" v-on:click="translate($event)" :alt="league.name" :title="league.name" />
+  <img :src="leagueLogo" v-on:click="leagueSelected($event)" :alt="league.name" :title="league.name" />
 </template>
 
 <script>
@@ -18,8 +18,8 @@ export default {
   },
 
   methods: {
-  	translate(event) {
-  		this.$emit('translate', event.target);
+  	leagueSelected(event) {
+  		this.$emit('leagueSelected', event.target);
   	}
   }
 };

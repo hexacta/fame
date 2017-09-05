@@ -4,7 +4,7 @@
   	v-on:appear="enter"
     v-bind:css="false"
   >
-		<league-logo class="pointer" v-on:translate="translate" :league="league" ></league-logo>
+		<league-logo class="pointer" v-on:leagueSelected="animate" :league="league" ></league-logo>
 	</transition>
 </template>
 
@@ -12,7 +12,16 @@
 import Velocity from "velocity-animate"
 import LeagueLogo from '@/components/LeagueLogo';
 
-function animateItemPicked(item) {
+/**
+* In order to get always the correct position the league-logo component must always be the 
+* first element in LeaguePage.vue to match the offsetTop of then 'main' element
+**/
+
+function calculateTop() {
+  return document.querySelector('main').offsetTop;
+}
+
+function animateLeagueSelected(item) {
   const selectedLeagueImage = item;
   const cloneImageForAnimation = item.cloneNode(true);
   const body = document.querySelector('body');
@@ -26,7 +35,7 @@ function animateItemPicked(item) {
   Velocity.animate(
     cloneImageForAnimation, {
       transition: '0.85s ease-in-out;', 
-      top: document.querySelector('main').offsetTop, 
+      top: calculateTop(), 
       left: '50%', 
       marginLeft: `-${cloneImageForAnimation.width/2}px` 
     }
@@ -48,8 +57,8 @@ export default {
     enter(el) {
       Velocity(el, { opacity: [1,0] }, { duration: 300 })
     },
-    translate(item) {
-    	animateItemPicked(item);
+    animate(item) {
+    	animateLeagueSelected(item);
     }
   },
 
