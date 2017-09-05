@@ -1,12 +1,16 @@
 <template>
-  <div id="app">
-    <header>
-      <router-link to="/"><span >FAME</span></router-link>
-    </header>
-    <main>
-      <router-view></router-view>
-    </main>
-  </div>
+  
+    <div id="app">
+      <header>
+        <router-link to="/"><span >FAME</span></router-link>
+      </header>
+      <main>
+        <transition name="fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      </main>
+    </div>
+  
 </template>
 
 <script>
@@ -54,5 +58,14 @@ header span {
   font-weight: 400;
   box-sizing: border-box;
   padding-top: 16px;
+}
+
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: opacity 0.25s ease;
 }
 </style>

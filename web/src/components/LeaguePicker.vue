@@ -21,14 +21,14 @@ export default {
   props: ['leagues'],
   data() {
     return {
-      league: null,
+      league: null
     };
   },
   methods: {
     pick(league) {
       this.league = league;
       this.$emit('pick', league);
-    },
+    }
   },
 };
 </script>

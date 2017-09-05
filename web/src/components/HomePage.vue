@@ -22,14 +22,14 @@ export default {
   data() {
     return {
       selectedLeague: null,
-      leagues,
+      leagues
     };
   },
   methods: {
     pick(league) {
       this.selectedLeague = league;
       this.$router.push({ name: 'League', params: { slug: league.slug } });
-    },
+    }
   },
 };
 </script>
@@ -49,4 +49,5 @@ export default {
 .picker {
   text-align: center;
 }
+
 </style>
